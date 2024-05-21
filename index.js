@@ -37,37 +37,36 @@ function runMainMenu() {
         'Update an Employee Role',
         'Exit'
       ]
-    })
-    .then(answer => {
-        switch(answer.action) {
-          case 'View All Departments':
-            viewDepartments();
-            break;
-          case 'View All Roles':
-            viewRoles();
-            break;
-          case 'View All Employees':
-            viewEmployees();
-            break;
-          case 'Add a Department':
-            addDepartment();
-            break;
-          case 'Add a Role':
-            addRole();
-            break;
-          case 'Add an Employee':
-            addEmployee();
-            break;
-          case 'Update an Employee Role':
-            updateEmployeeRole();
-            break;
-          case 'Exit':
-            connection.end();
-            console.log('Goodbye!');
-            break;
-        }
+    }).then(answer => {
+      switch (answer.action) {
+        case 'View All Departments':
+          viewDepartments();
+          break;
+        case 'View All Roles':
+          viewRoles();
+          break;
+        case 'View All Employees':
+          viewEmployees();
+          break;
+        case 'Add a Department':
+          addDepartment();
+          break;
+        case 'Add a Role':
+          addRole();
+          break;
+        case 'Add an Employee':
+          addEmployee();
+          break;
+        case 'Update an Employee Role':
+          updateEmployeeRole();
+          break;
+        case 'Exit':
+          connection.end();
+          console.log('Goodbye!');
+          break;
+      }
     });
-}
+  }
 
 // Function to view all departments
 function viewDepartments() {
@@ -193,7 +192,7 @@ function addDepartment() {
     });
   }
 
-  // Function to update an employee's role
+// Function to update an employee's role
 function updateEmployeeRole() {
     inquirer.prompt([
       {
@@ -218,7 +217,7 @@ function updateEmployeeRole() {
     });
   }
 
-  // Function to view employees by manager
+// Function to view employees by manager
 function viewEmployeesByManager() {
     inquirer.prompt({
       name: 'manager_id',
