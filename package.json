@@ -1,0 +1,25 @@
+{
+    "name": "sql-employee-tracker",
+    "version": "1.0.0",
+    "description": "A command-line application to manage a company's employee database.",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js",
+      "seed": "mysql -u root -p --database=employee_tracker_db < ./db/schema.sql && mysql -u root -p --database=employee_tracker_db < ./db/seeds.sql"
+    },
+    "keywords": [
+      "employee",
+      "management",
+      "system",
+      "database",
+      "CLI"
+    ],
+    "author": "Darkvanilla22",
+    "license": "MIT",
+    "dependencies": {
+      "console.table": "^0.10.0",
+      "dotenv": "^16.4.5",
+      "inquirer": "^8.2.4",
+      "mysql2": "^2.3.0"
+    }
+  }
