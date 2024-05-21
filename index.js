@@ -111,3 +111,84 @@ function viewDepartments() {
     });
   }
   
+  // Function to add a new department
+function addDepartment() {
+    inquirer.prompt({
+      name: 'name',
+      type: 'input',
+      message: 'What is the name of the department?'
+    }).then(answer => {
+      const query = 'INSERT INTO departments (name) VALUES (?)';
+      connection.query(query, answer.name, (err, res) => {
+        if (err) throw err;
+        console.log(`Added ${answer.name} to departments.`);
+        runMainMenu();
+      });
+    });
+  }
+  
+  // Function to add a new role
+  function addRole() {
+    inquirer.prompt([
+      {
+        name: 'title',
+        type: 'input',
+        message: 'What is the title of the role?'
+      },
+      {
+        name: 'salary',
+        type: 'input',
+        message: 'What is the salary for the role?',
+        validate: value => isNaN(value) === false || 'Please enter a valid number.'
+      },
+      {
+        name: 'department_id',
+        type: 'input',
+        message: 'What is the department ID for this role?',
+        validate: value => isNaN(value) === false || 'Please enter a valid department ID.'
+      }
+    ]).then(answers => {
+      const query = 'INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)';
+      connection.query(query, [answers.title, answers.salary, answers.department_id], (err, res) => {
+        if (err) throw err;
+        console.log(`Added ${answers.title} to roles.`);
+        runMainMenu();
+      });
+    });
+  }
+  
+  // Function to add a new employee
+  function addEmployee() {
+    inquirer.prompt([
+      {
+        name: 'first_name',
+        type: 'input',
+        message: 'What is the employee\'s first name?'
+      },
+      {
+        name: 'last_name',
+        type: 'input',
+        message: 'What is the employee\'s last name?'
+      },
+      {
+        name: 'role_id',
+        type: 'input',
+        message: 'What is the role ID for this employee?',
+        validate: value => isNaN(value) === false || 'Please enter a valid role ID.'
+      },
+      {
+        name: 'manager_id',
+        type: 'input',
+        message: 'What is the manager ID for this employee (enter if applicable, else leave blank)?',
+        validate: value => (value === '' || isNaN(value) === false) || 'Please enter a valid manager ID or leave blank.',
+        default: null
+      }
+    ]).then(answers => {
+      const query = 'INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)';
+      connection.query(query, [answers.first_name, answers.last_name, answers.role_id, answers.manager_id || null], (err, res) => {
+        if (err) throw err;
+        console.log(`Added ${answers.first_name} ${answers.last_name} to employees.`);
+        runMainMenu();
+      });
+    });
+  }
