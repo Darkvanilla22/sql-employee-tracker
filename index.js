@@ -192,3 +192,28 @@ function addDepartment() {
       });
     });
   }
+
+  // Function to update an employee's role
+function updateEmployeeRole() {
+    inquirer.prompt([
+      {
+        name: 'employee_id',
+        type: 'input',
+        message: 'Enter the ID of the employee whose role you want to update:',
+        validate: value => isNaN(value) === false || 'Please enter a valid employee ID.'
+      },
+      {
+        name: 'new_role_id',
+        type: 'input',
+        message: 'Enter the new role ID for the employee:',
+        validate: value => isNaN(value) === false || 'Please enter a valid role ID.'
+      }
+    ]).then(answers => {
+      const query = 'UPDATE employees SET role_id = ? WHERE employee_id = ?';
+      connection.query(query, [answers.new_role_id, answers.employee_id], (err, res) => {
+        if (err) throw err;
+        console.log(`Updated role for employee ID ${answers.employee_id}.`);
+        runMainMenu();
+      });
+    });
+  }
