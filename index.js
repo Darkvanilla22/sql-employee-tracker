@@ -217,3 +217,24 @@ function updateEmployeeRole() {
       });
     });
   }
+
+  // Function to view employees by manager
+function viewEmployeesByManager() {
+    inquirer.prompt({
+      name: 'manager_id',
+      type: 'input',
+      message: 'Enter the ID of the manager to view their employees:'
+    }).then(answer => {
+      const query = `
+        SELECT employees.id, employees.first_name, employees.last_name, roles.title
+        FROM employees
+        INNER JOIN roles ON employees.role_id = roles.id
+        WHERE employees.manager_id = ?
+      `;
+      connection.query(query, [answer.manager_id], (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        runMainMenu();
+      });
+    });
+  }
