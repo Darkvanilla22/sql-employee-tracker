@@ -35,6 +35,9 @@ function runMainMenu() {
         'Add a Role',
         'Add an Employee',
         'Update an Employee Role',
+        'Delete a Department',
+        'Delete a Role',
+        'Delete an Employee',
         'Exit'
       ]
     }).then(answer => {
@@ -59,6 +62,15 @@ function runMainMenu() {
           break;
         case 'Update an Employee Role':
           updateEmployeeRole();
+          break;
+        case 'Delete a Department':
+          deleteDepartment();
+          break;
+        case 'Delete a Role':
+          deleteRole();
+          break;
+        case 'Delete an Employee':
+          deleteEmployee();
           break;
         case 'Exit':
           connection.end();
