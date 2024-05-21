@@ -238,3 +238,24 @@ function viewEmployeesByManager() {
       });
     });
   }
+
+  // Function to view employees by department
+function viewEmployeesByDepartment() {
+    inquirer.prompt({
+      name: 'department_id',
+      type: 'input',
+      message: 'Enter the ID of the department to view its employees:'
+    }).then(answer => {
+      const query = `
+        SELECT employees.id, employees.first_name, employees.last_name, roles.title
+        FROM employees
+        INNER JOIN roles ON employees.role_id = roles.id
+        WHERE roles.department_id = ?
+      `;
+      connection.query(query, [answer.department_id], (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        runMainMenu();
+      });
+    });
+  }
