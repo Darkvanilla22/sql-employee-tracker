@@ -1,5 +1,7 @@
 -- Purpose: This file contains the schema for the database tables. The database is called employee_tracker_db and contains three tables: department, role, and employee.
-CREATE DATABASE IF NOT EXISTS employee_tracker_db;
+DROP DATABASE IF EXISTS employee_tracker_db;
+CREATE DATABASE employee_tracker_db;
+
 USE employee_tracker_db;
 
 -- Schema for department table
