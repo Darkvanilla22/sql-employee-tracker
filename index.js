@@ -192,6 +192,57 @@ function addDepartment() {
     });
   }
 
+// Function to delete a department
+function deleteDepartment() {
+    inquirer.prompt({
+      name: 'department_id',
+      type: 'input',
+      message: 'Enter the ID of the department you want to delete:',
+      validate: value => isNaN(value) === false || 'Please enter a valid department ID.'
+    }).then(answer => {
+      const query = 'DELETE FROM departments WHERE department_id = ?';
+      connection.query(query, [answer.department_id], (err, res) => {
+        if (err) throw err;
+        console.log(`Deleted department with ID ${answer.department_id}.`);
+        runMainMenu();
+      });
+    });
+  }
+  
+  // Function to delete a role
+  function deleteRole() {
+    inquirer.prompt({
+      name: 'role_id',
+      type: 'input',
+      message: 'Enter the ID of the role you want to delete:',
+      validate: value => isNaN(value) === false || 'Please enter a valid role ID.'
+    }).then(answer => {
+      const query = 'DELETE FROM roles WHERE role_id = ?';
+      connection.query(query, [answer.role_id], (err, res) => {
+        if (err) throw err;
+        console.log(`Deleted role with ID ${answer.role_id}.`);
+        runMainMenu();
+      });
+    });
+  }
+  
+  // Function to delete an employee
+  function deleteEmployee() {
+    inquirer.prompt({
+      name: 'employee_id',
+      type: 'input',
+      message: 'Enter the ID of the employee you want to delete:',
+      validate: value => isNaN(value) === false || 'Please enter a valid employee ID.'
+    }).then(answer => {
+      const query = 'DELETE FROM employees WHERE employee_id = ?';
+      connection.query(query, [answer.employee_id], (err, res) => {
+        if (err) throw err;
+        console.log(`Deleted employee with ID ${answer.employee_id}.`);
+        runMainMenu();
+      });
+    });
+  }
+
 // Function to update an employee's role
 function updateEmployeeRole() {
     inquirer.prompt([
